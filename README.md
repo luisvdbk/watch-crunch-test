@@ -19,6 +19,6 @@ Also see: `tests\Feature\ProfileTest` and `tests\Feature\Models\UserTest`
 Also see: `tests\Feature\Actions\GetLessActiveUsersTest`
 
 ### Tests
-The tests use a sqlite in-memory db
-Before running the tests you might need to run `php artisan config:clear`
+The tests use a sqlite in-memory db  
+Before running the tests you might need to run `php artisan config:clear`   
 Run the tests by using: `php artisan test`
