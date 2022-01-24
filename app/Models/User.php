@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -52,5 +53,10 @@ class User extends Authenticatable
     public function setUsernameAttribute(string $value): void
     {
         $this->attributes['username'] = Str::lower($value);
+    }
+
+    public function scopeByusername(Builder $query, string $username): Builder
+    {
+        return $query->where('username', Str::lower($username));
     }
 }

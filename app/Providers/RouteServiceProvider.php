@@ -8,7 +8,6 @@ use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvi
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Str;
 
 class RouteServiceProvider extends ServiceProvider
 {
@@ -51,7 +50,7 @@ class RouteServiceProvider extends ServiceProvider
         });
 
         Route::bind('username', function ($value) {
-            return User::where('username', Str::lower($value))->firstOrFail();
+            return User::byUsername($value)->firstOrFail();
         });
     }
 
