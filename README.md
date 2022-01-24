@@ -11,11 +11,11 @@
 - Run `php artisan migrate --seed`
 
 ### Problem 1
-The `/{username}` route has been setup. Got to this route by using some of the usernames generated from the seeders.
+The `/{username}` route has been setup. Got to this route by using some of the usernames generated from the seeders.  
 Also see: `tests\Feature\ProfileTest` and `tests\Feature\Models\UserTest`
 
 ### Problem 2
-`Actions\GetLessActiveUsers` action class solves this problem. Can be run in `php artisan tinker` like: `app(GetLessActiveUsers::class)->handle()`
+`Actions\GetLessActiveUsers` action class solves this problem. Can be run in `php artisan tinker` like: `app(GetLessActiveUsers::class)->handle()`.   
 Also see: `tests\Feature\Actions\GetLessActiveUsersTest`
 
 ### Tests
