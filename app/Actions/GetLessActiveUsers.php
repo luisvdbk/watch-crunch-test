@@ -21,7 +21,7 @@ class GetLessActiveUsers
 
             /**
              * Depending on the usecase we might want to ->limit/->take certain number of users
-             * in case we have too many on the dbs
+             * in case we have too many on the db
              */
             return User::whereNotIn('id', $usersThatPostedWithinLastDays)->get();
         });
