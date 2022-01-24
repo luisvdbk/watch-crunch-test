@@ -5,6 +5,7 @@ namespace Tests\Feature\Actions;
 use App\Actions\GetLessActiveUsers;
 use App\Models\Post;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
@@ -47,5 +48,46 @@ class GetLessActiveUsersTest extends TestCase
         $this->assertCount(2, $users);
         $this->assertTrue($usersById->contains($userA->id));
         $this->assertTrue($usersById->contains($userC->id));
+    }
+
+    /**
+     * @test
+     */
+    public function it_caches_result_until_next_day()
+    {
+        $userA = factory(User::class)->create();
+        $postA = factory(Post::class)->create([
+            'created_at' => now()->subDays(9),
+            'user_id' => $userA->id,
+        ]);
+
+        $users = app(GetLessActiveUsers::class)->handle();
+        $usersById = $users->pluck('id');
+
+        $this->assertCount(1, $users);
+        $this->assertTrue($usersById->contains($userA->id));
+
+        Carbon::setTestNow(now()->endOfDay()->subMinute());
+
+        $userB = factory(User::class)->create();
+        $postB = factory(Post::class)->create([
+            'created_at' => now()->subDays(9),
+            'user_id' => $userB->id,
+        ]);
+
+        $users = app(GetLessActiveUsers::class)->handle();
+        $usersById = $users->pluck('id');
+
+        $this->assertCount(1, $users);
+        $this->assertTrue($usersById->contains($userA->id));
+
+        Carbon::setTestNow(now()->endOfDay()->addMinute());
+
+        $users = app(GetLessActiveUsers::class)->handle();
+        $usersById = $users->pluck('id');
+
+        $this->assertCount(2, $users);
+        $this->assertTrue($usersById->contains($userA->id));
+        $this->assertTrue($usersById->contains($userB->id));
     }
 }
