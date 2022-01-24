@@ -3,9 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use Illuminate\Foundation\Testing\LazilyRefreshDatabase;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
 class ProfileTest extends TestCase
@@ -16,7 +13,7 @@ class ProfileTest extends TestCase
     public function it_renders_the_profile_view()
     {
         $user = factory(User::class)->create([
-            'username' => 'davidgrey'
+            'username' => 'davidgrey',
         ]);
 
         $this
@@ -24,7 +21,7 @@ class ProfileTest extends TestCase
             ->assertOk()
             ->assertViewIs('profile');
     }
-    
+
     /**
      * @test
      * @dataProvider usernamesProvider
@@ -32,9 +29,9 @@ class ProfileTest extends TestCase
     public function identifies_profile_when_using_different_casings(string $usernameParam)
     {
         $user = factory(User::class)->create([
-            'username' => 'davidgrey'
+            'username' => 'davidgrey',
         ]);
-        
+
         $this
             ->get(route('profile', $usernameParam))
             ->assertOk()
@@ -45,8 +42,8 @@ class ProfileTest extends TestCase
     {
         return [
             ['davidgrey'],
-            ['davidGrey'], 
-            ['DavidGrey'], 
+            ['davidGrey'],
+            ['DavidGrey'],
             ['daVidGreY'],
         ];
     }
