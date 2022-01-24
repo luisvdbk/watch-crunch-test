@@ -17,3 +17,8 @@ Also see: `tests\Feature\ProfileTest` and `tests\Feature\Models\UserTest`
 ### Problem 2
 `Actions\GetLessActiveUsers` action class solves this problem. Can be run in `php artisan tinker` like: `app(GetLessActiveUsers::class)->handle()`
 Also see: `tests\Feature\Actions\GetLessActiveUsersTest`
+
+### Tests
+The tests use a sqlite in-memory db
+Before running the tests you might need to run `php artisan config:clear`
+Run the tests by using: `php artisan test`
