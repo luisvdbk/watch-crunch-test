@@ -15,10 +15,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        collect()->times(10)->each(function () {
+        collect()->times(20)->each(function () {
             $user = factory(User::class)->create();
-            $posts = factory(Post::class, rand(1, 5))->create([
+            $posts = factory(Post::class, rand(5, 20))->create([
                 'user_id' => $user->id,
+                'created_at' => now()->subDays(rand(5, 10)),
             ]);
         });
     }
