@@ -15,15 +15,15 @@ class GetLessActiveUsers
     public function handle(): Collection
     {
         return Cache::remember(self::CACHE_KEY, now()->endOfDay(), function () {
-            $postsWithinLastWeekByUserId = Post::select('user_id')
-                ->where('created_at', '>=', now()->subDays(self::DAYS_TO_CONSIDER)->endOfDay())
+            $usersThatPostedWithinLastDays = Post::select('user_id')
+                ->where('created_at', '>=', now()->subDays(self::DAYS_TO_CONSIDER)->startOfDay())
                 ->groupBy('user_id');
 
             /**
              * Depending on the usecase we might want to ->limit/->take certain number of users
              * in case we have too many on the dbs
              */
-            return User::whereNotIn('id', $postsWithinLastWeekByUserId)->get();
+            return User::whereNotIn('id', $usersThatPostedWithinLastDays)->get();
         });
     }
 }
