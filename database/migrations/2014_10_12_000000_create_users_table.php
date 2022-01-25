@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
              * use the lower() postgres function on the username column (worse for performance)
              * we coud also use things like generated/virtual columns
              *
-             * for me this solution is good enough, performant and not that complex 
+             * for me this solution is good enough, performant and not that complex
              */
             $table->string('username_lowercased')->unique();
             $table->string('email')->unique();
