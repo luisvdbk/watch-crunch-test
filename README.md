@@ -22,3 +22,6 @@ Also see: `tests\Feature\Actions\GetLessActiveUsersTest`
 The tests use a sqlite in-memory db  
 Before running the tests you might need to run `php artisan config:clear`   
 Run the tests by using: `php artisan test`
+
+### Code Style
+Run `composer cs-fix` to apply code style fixes (from php cs fixer)
