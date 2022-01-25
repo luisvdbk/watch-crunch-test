@@ -44,18 +44,21 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    protected static function booted()
+    {
+        /** this could also be in an observer */
+        static::saving(function (User $user) {
+            $user->username_lowercased = Str::lower($user->username);
+        });
+    }
+
     public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
     }
 
-    public function setUsernameAttribute(string $value): void
+    public function scopeByUsername(Builder $query, string $username): Builder
     {
-        $this->attributes['username'] = Str::lower($value);
-    }
-
-    public function scopeByusername(Builder $query, string $username): Builder
-    {
-        return $query->where('username', Str::lower($username));
+        return $query->where('username_lowercased', Str::lower($username));
     }
 }

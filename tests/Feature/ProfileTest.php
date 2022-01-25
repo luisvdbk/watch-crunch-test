@@ -13,7 +13,7 @@ class ProfileTest extends TestCase
     public function it_renders_the_profile_view()
     {
         $user = factory(User::class)->create([
-            'username' => 'davidgrey',
+            'username' => 'davidGrey',
         ]);
 
         $this
@@ -26,14 +26,14 @@ class ProfileTest extends TestCase
      * @test
      * @dataProvider usernamesProvider
      */
-    public function identifies_profile_when_using_different_casings(string $usernameParam)
+    public function identifies_profile_when_using_different_casings(string $stored, string $param)
     {
         $user = factory(User::class)->create([
-            'username' => 'davidgrey',
+            'username' => $stored,
         ]);
 
         $this
-            ->get(route('profile', $usernameParam))
+            ->get(route('profile', $param))
             ->assertOk()
             ->assertViewIs('profile');
     }
@@ -41,10 +41,10 @@ class ProfileTest extends TestCase
     public function usernamesProvider()
     {
         return [
-            ['davidgrey'],
-            ['davidGrey'],
-            ['DavidGrey'],
-            ['daVidGreY'],
+            ['daVidGreY', 'davidgrey'],
+            ['DavidGrey', 'davidGrey'],
+            ['davidgrey', 'DavidGrey'],
+            ['davidGrey', 'daVidGreY'],
         ];
     }
 }

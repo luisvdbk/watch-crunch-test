@@ -10,17 +10,19 @@ class UserTest extends TestCase
     /**
      * @test
      */
-    public function it_saves_username_in_lowercase()
+    public function it_saves_lowercased_version_of_the_username()
     {
         $userA = factory(User::class)->create([
             'username' => 'davidGrey',
         ]);
 
-        $this->assertEquals('davidgrey', $userA->username);
+        $this->assertEquals('davidGrey', $userA->username);
+        $this->assertEquals('davidgrey', $userA->username_lowercased);
 
         $userA->username = 'DavidGrey';
         $userA->save();
 
-        $this->assertEquals('davidgrey', $userA->username);
+        $this->assertEquals('DavidGrey', $userA->username);
+        $this->assertEquals('davidgrey', $userA->username_lowercased);
     }
 }
