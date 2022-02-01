@@ -29,7 +29,7 @@ class GetTopUsers
             return [
                 'username' => $user->username,
                 'created_posts_count' => $user->posts_count,
-                'last_post_title' => $user->lastPost->title, 
+                'last_post_title' => $user->lastPost->title,
             ];
         });
     }
