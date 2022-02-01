@@ -40,7 +40,7 @@ class GetLessActiveUsersTest extends TestCase
             'user_id' => $userD->id,
         ]);
 
-        $users = app(GetLessActiveUsers::class)->handle();
+        $users = app(GetLessActiveUsers::class)->execute();
         $usersById = $users->pluck('id');
 
         $this->assertCount(2, $users);
@@ -59,7 +59,7 @@ class GetLessActiveUsersTest extends TestCase
             'user_id' => $userA->id,
         ]);
 
-        $users = app(GetLessActiveUsers::class)->handle();
+        $users = app(GetLessActiveUsers::class)->execute();
         $usersById = $users->pluck('id');
 
         $this->assertCount(1, $users);
@@ -73,7 +73,7 @@ class GetLessActiveUsersTest extends TestCase
             'user_id' => $userB->id,
         ]);
 
-        $users = app(GetLessActiveUsers::class)->handle();
+        $users = app(GetLessActiveUsers::class)->execute();
         $usersById = $users->pluck('id');
 
         $this->assertCount(1, $users);
@@ -81,7 +81,7 @@ class GetLessActiveUsersTest extends TestCase
 
         Carbon::setTestNow(now()->endOfDay()->addMinute());
 
-        $users = app(GetLessActiveUsers::class)->handle();
+        $users = app(GetLessActiveUsers::class)->execute();
         $usersById = $users->pluck('id');
 
         $this->assertCount(2, $users);

@@ -6,14 +6,17 @@ use App\Models\Post;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Cache;
+use Spatie\QueueableAction\QueueableAction;
 
 class GetTopUsers
 {
+    use QueueableAction;
+
     public const DAYS_TO_CONSIDER = 7;
     public const MIN_POSTS_REQUIRED = 10;
     public const CACHE_KEY = 'top_users';
 
-    public function handle(): Collection
+    public function execute(): Collection
     {
         /** @var \Illuminate\Database\Eloquent\Collection */
         $topUsers = Cache::remember(self::CACHE_KEY, now()->endOfDay(), function () {

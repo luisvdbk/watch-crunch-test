@@ -12,7 +12,7 @@ class GetLessActiveUsers
     public const DAYS_TO_CONSIDER = 7;
     public const CACHE_KEY = 'less_active_users';
 
-    public function handle(): Collection
+    public function execute(): Collection
     {
         return Cache::remember(self::CACHE_KEY, now()->endOfDay(), function () {
             $usersThatPostedWithinLastDays = Post::select('user_id')
