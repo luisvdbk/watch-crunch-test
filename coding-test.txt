@@ -1,0 +1,46 @@
+Coding test
+
+This is a sample application. We do NOT need any kind of frontend work (JS, CSS), or any blade template writing in this application. Only backend functionalities with appropriate tests written within Laravel.
+
+1. You should follow SOLID, DRY, YAGNI methods and terms. 
+2. Use PHP 7.4, Laravel 8, model factory (legacy), faker etc. 
+3. Use PostgreSQL as database and Redis as cache driver. 
+4. Please provide final .env file.
+
+User model:
+-- id (BigInt)
+-- username (VarChar 31, Unique)
+-- created_at (dateTime)
+-- updated_at (dateTime)
+
+Post model:
+-- id (BigInt)
+-- title (VarChar 255)
+-- user_id (reference to user ID)
+-- created_at (dateTime)
+-- updated_at (dateTime)
+
+Here are the Model relations we need in the application:
+# A Post must belong to a User
+# A User can have many Posts
+
+## Problems to solve:
+
+# Problem 1:
+
+We want to have usernames with capital and lower letter combination. Something like: 'davidgrey', 'davidGrey', 'DavidGrey' etc. So ideally the 'username' should act in a case-insensitive manner in the application and database query.
+
+User profile url remains on top level slug, i.e. https://example.com/{username}. So if a user visits slug url '/davidgrey', '/davidGrey', '/DavidGrey' then the user should see the same user from database. There are several ways from Attribute Mutator to Database to Middleware level solutions. You should decide the best solution and implement it. Pease write some tests against this feature too.
+
+# Problem 2:
+
+Some users (around 3) did not create posts within the last 7 days. So please write a database query that will return those users who did not create posts within that duration. Write this query as raw approach, without using any eloquent special relationships (like 'whereHas' or similar methods). So choose joins or sub-query approach, whatever you feel is right. Please write tests for this too.
+
+-----
+
+Please remember, you do not need to do any css/js/blade templating. All of these tests are possible by headless backend features only. 
+
+Good luck and happy coding!
+
+
+
