@@ -61,7 +61,7 @@ class User extends Authenticatable
 
     public function lastPost(): HasOne
     {
-        return $this->hasOne(Post::class, 'last_post_id');
+        return $this->hasOne(Post::class, 'id', 'last_post_id');
     }
 
     public function scopeByUsername(Builder $query, string $username): Builder

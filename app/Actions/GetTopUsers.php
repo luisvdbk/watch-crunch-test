@@ -22,7 +22,7 @@ class GetTopUsers
             $usersThatPostedEnoughWithinLastDays = Post::select('user_id')
                 ->where('created_at', '>=', now()->subDays(self::DAYS_TO_CONSIDER)->startOfDay())
                 ->groupBy('user_id')
-                ->havingRaw('COUNT(*) > ?', [self::MIN_POSTS_REQUIRED]);
+                ->havingRaw('COUNT(*) >= ?', [self::MIN_POSTS_REQUIRED]);
 
             return User::with('lastPost')->whereIn('id', $usersThatPostedEnoughWithinLastDays)->get();
         });
