@@ -12,11 +12,21 @@
 
 ### Problem 1
 The `/{username}` route has been setup. Got to this route by using some of the usernames generated from the seeders.  
-Also see: `tests\Feature\ProfileTest` and `tests\Feature\Models\UserTest`
+Also see: `tests\Feature\ProfileTest` and `Tests\Feature\Models\UserTest`
 
 ### Problem 2
 `Actions\GetLessActiveUsers` action class solves this problem. Can be run in `php artisan tinker` like: `app(GetLessActiveUsers::class)->handle()`.   
 Also see: `tests\Feature\Actions\GetLessActiveUsersTest`
+
+### Problem 3
+`Actions\GetLessActiveUsers` action class solves this problem. Can be run in `php artisan tinker` like: `app(GetLessActiveUsers::class)->handle()`.   
+Also see: `Tests\Feature\Actions\GetLessActiveUsersTest`
+
+
+### Problem 4 (test 2)
+`Actions\GetTopUsers` action class solves this problem. Can be run in `php artisan tinker` like: `app(GetTopUsers::class)->handle()`.  
+It's also scheduled to run every day  
+Also see: `Tests\Feature\Actions\GetTopUsersTest`, `Tests\Feature\Models\PostTest`, `App\Observer\PostObserver`
 
 ### Tests
 The tests use a sqlite in-memory db  
