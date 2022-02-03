@@ -15,7 +15,7 @@ class AddPostsMetaColumnsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->after('password', function (Blueprint $table) {
-                $table->foreignId('last_post_id')->nullable()->constrained('posts');
+                $table->foreignId('last_post_id')->nullable()->constrained('posts')->nullOnDelete();
                 $table->unsignedInteger('posts_count')->default(0);
             });
         });

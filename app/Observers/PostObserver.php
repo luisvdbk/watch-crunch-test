@@ -20,4 +20,22 @@ class PostObserver
         $user->posts_count++;
         $user->save();
     }
+
+    /**
+     * Handle the Post "created" event.
+     *
+     * @param  \App\Models\Post  $post
+     * @return void
+     */
+    public function deleted(Post $post)
+    {
+        $user = $post->user;
+
+        if ($lastPost = $user->posts()->latest('id')->first()) {
+            $user->last_post_id = $lastPost->id;
+        }
+
+        $user->posts_count--;
+        $user->save();
+    }
 }
