@@ -16,7 +16,6 @@ class PostObserver
     {
         $user = $post->user;
 
-        $user->last_posted_at = now();
         $user->last_post_id = $post->id;
         $user->posts_count++;
         $user->save();

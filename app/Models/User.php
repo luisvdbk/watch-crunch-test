@@ -43,7 +43,6 @@ class User extends Authenticatable
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'last_posted_at' => 'datetime',
     ];
 
     protected static function booted()

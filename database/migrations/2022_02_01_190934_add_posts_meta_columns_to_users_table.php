@@ -15,7 +15,6 @@ class AddPostsMetaColumnsToUsersTable extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->after('password', function (Blueprint $table) {
-                $table->timestamp('last_posted_at')->nullable();
                 $table->foreignId('last_post_id')->nullable()->constrained('posts');
                 $table->unsignedInteger('posts_count')->default(0);
             });
@@ -30,7 +29,7 @@ class AddPostsMetaColumnsToUsersTable extends Migration
     public function down()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn(['last_posted_at', 'last_post_id', 'posts_count',]);
+            $table->dropColumn(['last_post_id', 'posts_count',]);
         });
     }
 }
