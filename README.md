@@ -18,12 +18,7 @@ Also see: `tests\Feature\ProfileTest` and `Tests\Feature\Models\UserTest`
 `Actions\GetLessActiveUsers` action class solves this problem. Can be run in `php artisan tinker` like: `app(GetLessActiveUsers::class)->handle()`.   
 Also see: `tests\Feature\Actions\GetLessActiveUsersTest`
 
-### Problem 3
-`Actions\GetLessActiveUsers` action class solves this problem. Can be run in `php artisan tinker` like: `app(GetLessActiveUsers::class)->handle()`.   
-Also see: `Tests\Feature\Actions\GetLessActiveUsersTest`
-
-
-### Problem 4 (test 2)
+### Problem 3 (test 2)
 `Actions\GetTopUsers` action class solves this problem. Can be run in `php artisan tinker` like: `app(GetTopUsers::class)->handle()`.  
 It's also scheduled to run every day  
 Also see: `Tests\Feature\Actions\GetTopUsersTest`, `Tests\Feature\Models\PostTest`, `App\Observer\PostObserver`
